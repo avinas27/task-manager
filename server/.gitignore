@@ -1,0 +1,15 @@
+# Database files (if using SQLite)
+*.db
+*.sqlite
+
+# Uploads directory (if handling file uploads)
+uploads/
+public/uploads/
+
+# Session files
+sessions/
+
+# SSL certificates (if using HTTPS locally)
+ssl/
+*.pem
+*.key
