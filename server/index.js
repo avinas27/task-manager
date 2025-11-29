@@ -44,7 +44,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// User registration portion
+// this is for user registration portal
 app.post('/api/register', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -63,7 +63,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// User login portion
+// user login portion
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -89,7 +89,7 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-// getting tasks from user
+// getting all tasks from user
 app.get('/api/tasks', authenticateToken, (req, res) => {
   const sql = 'SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC';
   db.query(sql, [req.user.id], (err, results) => {
@@ -100,7 +100,7 @@ app.get('/api/tasks', authenticateToken, (req, res) => {
   });
 });
 
-// Create a new task
+// creating anew task
 app.post('/api/tasks', authenticateToken, (req, res) => {
   const { title, description, status, priority, due_date } = req.body;
   const sql = 'INSERT INTO tasks (title, description, status, priority, due_date, user_id) VALUES (?, ?, ?, ?, ?, ?)';
@@ -113,7 +113,7 @@ app.post('/api/tasks', authenticateToken, (req, res) => {
   });
 });
 
-// Updating a task
+// updating a task
 app.put('/api/tasks/:id', authenticateToken, (req, res) => {
   const { title, description, status, priority, due_date } = req.body;
   const sql = 'UPDATE tasks SET title = ?, description = ?, status = ?, priority = ?, due_date = ? WHERE id = ? AND user_id = ?';
@@ -129,7 +129,7 @@ app.put('/api/tasks/:id', authenticateToken, (req, res) => {
   });
 });
 
-// Deletign a task
+// deleting a task
 app.delete('/api/tasks/:id', authenticateToken, (req, res) => {
   const sql = 'DELETE FROM tasks WHERE id = ? AND user_id = ?';
   
