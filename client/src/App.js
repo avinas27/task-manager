@@ -18,8 +18,7 @@ function App() {
     email: '',
     password: ''
   });
-
-  // Setting up axios with auth token if user is already logged in
+// to set axios if user already loged in
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -28,8 +27,7 @@ function App() {
       fetchTasks();
     }
   }, []);
-
-  // Fetching tasks from the backend
+ // task fetching from backend
   const fetchTasks = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/tasks');
@@ -38,8 +36,7 @@ function App() {
       console.error('Had trouble getting tasks:', error);
     }
   };
-
-  // Getting user info from the token
+// gathering the information from the token 
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -58,7 +55,7 @@ function App() {
     }
   };
 
-  // Handling new user registration
+  // this is for new user registration
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
@@ -72,7 +69,7 @@ function App() {
     }
   };
 
-  // Handling user login
+  // for user login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -92,7 +89,7 @@ function App() {
     }
   };
 
-  // Logging out and clearing everything
+  // this is for log out and clearing everything 
   const handleLogout = () => {
     localStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
@@ -100,7 +97,7 @@ function App() {
     setTasks([]);
   };
 
-  // Adding a new task
+  // for adding a new task
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -118,7 +115,7 @@ function App() {
     }
   };
 
-  // Removing a task
+  // for removing a task
   const handleDeleteTask = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/tasks/${id}`);
@@ -128,11 +125,11 @@ function App() {
     }
   };
 
-  // Show login/register screen if no user is logged in
+  // if no user logged in this will show the front page of log in or sin in page
   if (!user) {
     return (
       <div className="App">
-        {/* Header with branding */}
+       
         <header className="app-header">
           <div className="branding">
             <h1>Task Manager</h1>
@@ -184,7 +181,7 @@ function App() {
     );
   }
 
-  // Main app view when user is logged in
+  // app view when user is logged  in
   return (
     <div className="App">
       {/* Header with user info and branding */}
@@ -233,7 +230,7 @@ function App() {
         </form>
       </div>
 
-      {/* List of all tasks */}
+      {/* task list */}
       <div className="tasks-list">
         <h2>Your Tasks ({tasks.length})</h2>
         {tasks.length === 0 ? (
